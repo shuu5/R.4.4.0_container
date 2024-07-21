@@ -1,0 +1,33 @@
+{
+    "name": "R Development Environment with RStudio Server (Japanese)",
+    "dockerFile": "Dockerfile",
+    "context": "..",
+    "remoteUser": "vscode",
+    "updateRemoteUserUID": true,
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "r.rterm.linux": "/usr/local/bin/R",
+        "r.bracketedPaste": true,
+        "r.plot.useHttpgd": true
+    },
+    "extensions": [
+        "reditorsupport.r",
+        "REditorSupport.r-lsp"
+    ],
+    "forwardPorts": [8787],
+    "mounts": [
+        "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.renv_cache,target=/renv/cache,type=bind,consistency=cached"
+    ],
+    "remoteEnv": {
+        "RENV_PATHS_CACHE": "/renv/cache",
+        "LANG": "ja_JP.UTF-8",
+        "LANGUAGE": "ja_JP:ja",
+        "LC_ALL": "ja_JP.UTF-8"
+    },
+    "postCreateCommand": "sudo chown -R vscode:vscode /workspace /renv/cache && sudo rstudio-server start",
+    "postStartCommand": "sudo rstudio-server start",
+    "features": {
+        "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {}
+    }
+}
