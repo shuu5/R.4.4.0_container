@@ -26,28 +26,69 @@ RUN apt-get update && apt-get install -y \
     fonts-ipafont \
     libfontconfig1-dev \
     libfreetype6-dev \
-    pkg-config
+    pkg-config \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
+    libcairo2-dev \
+    libgeos-dev \
+    libgsl0-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
+    libhdf5-dev \
+    libsqlite3-dev \
+    libboost-all-dev \
+    libssh-dev \
+    libxtst6 \
+    libxt6 \
+    python3-dev \
+    python3-pip \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libpcre3-dev \
+    libicu-dev \
+    net-tools \
+    iproute2 \
+    curl \
+    psmisc
 
 # RのGPGキーを追加
 RUN wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
 # CRANリポジトリを追加
-RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
 
-# R 4.4.1をインストール
-RUN apt-get update && apt-get install -y r-base=4.4.1* r-base-dev=4.4.1*
-
-# Rのバージョンを確認
-RUN R --version
+# Rのインストール
+RUN apt-get update && apt-get install -y r-base r-base-dev
 
 # renvをインストール
 RUN R -e "install.packages('renv', repos='https://cloud.r-project.org')"
 
-# RStudio Serverをインストール
+# RStudio Serverをインストール（オプション）
 RUN wget https://download2.rstudio.org/server/jammy/amd64/rstudio-server-2023.06.0-421-amd64.deb && \
     gdebi -n rstudio-server-2023.06.0-421-amd64.deb && \
     rm rstudio-server-2023.06.0-421-amd64.deb
+
+# RStudio Serverの設定を変更
+RUN echo "www-address=0.0.0.0" | sudo tee -a /etc/rstudio/rserver.conf
+
+# RStudio Server の設定ファイルのパーミッションを設定
+RUN mkdir -p /etc/rstudio && \
+    echo "www-address=0.0.0.0" > /etc/rstudio/rserver.conf && \
+    echo "auth-none=1" >> /etc/rstudio/rserver.conf && \
+    echo "server-user=vscode" >> /etc/rstudio/rserver.conf && \
+    echo "server-data-dir=/usr/local/share/rocker-devcontainer-features/rstudio-server/data" >> /etc/rstudio/rserver.conf && \
+    echo "database-config-file=/usr/local/share/rocker-devcontainer-features/rstudio-server/data/dbconf.conf" >> /etc/rstudio/rserver.conf && \
+    echo "log-dir=/var/log/rstudio/rstudio-server" >> /etc/rstudio/rserver.conf && \
+    chown -R vscode:vscode /etc/rstudio && \
+    chmod 644 /etc/rstudio/rserver.conf
+
+# ログディレクトリの作成
+RUN mkdir -p /var/log/rstudio/rstudio-server && \
+    chown -R vscode:vscode /var/log/rstudio
 
 # vscodeユーザーを作成
 RUN useradd -m vscode \
