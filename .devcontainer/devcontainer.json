@@ -25,7 +25,7 @@
         "LANGUAGE": "ja_JP:ja",
         "LC_ALL": "ja_JP.UTF-8"
     },
-    "postCreateCommand": "sudo chown -R vscode:vscode /workspace /renv/cache && sudo rstudio-server start",
+    "postCreateCommand": "R -e \"install.packages('renv', repos='https://cloud.r-project.org')\"",
     "postStartCommand": "sudo rstudio-server start",
     "features": {
         "ghcr.io/rocker-org/devcontainer-features/rstudio-server:0": {}
