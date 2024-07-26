@@ -10,6 +10,4 @@
 6. ユーザー名：vscode, パスワード：password(各自Dockerfileで変更)
 
 
-・新しいパッケージをインストールしたい場合
-    - Dockerfileの"RUN apt-get update && apt-get install -y \"に追記する。
-    - コンテナ内でインストールしてもコンテナを一旦閉じると元に戻る可能性がある。
+・新しいパッケージをインストールしたい場合は、Dockerfileの"RUN apt-get update && apt-get install -y \"に追記する。(コンテナ内でインストールしてもイメージを一旦閉じると元に戻る)
