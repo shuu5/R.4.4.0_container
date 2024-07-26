@@ -16,7 +16,12 @@
 6. RStudio-serverを使用する場合は、[http://localhost:8787](http://localhost:8787)にアクセスする。
 7. 各projectディレクトリに移動し、Rで`renv::restore()`を実行しrenv.lockに記載されたパッケージをインストールする。
 
-## 新しいパッケージのインストール
+## 新しいRパッケージのインストール
+
+- renv::install()を使います。
+- githubから直接ダウンロードするなど特殊なインストール方法の場合、インストール後にrenv::snapshot()を実行して依存関係を記録してください。
+
+## 新しいlinuxパッケージのインストール
 
 - 新しいパッケージをインストールしたい場合は、`Dockerfile`の`RUN apt-get update && apt-get install -y \`に追記する必要があります。
 - コンテナ内でインストールしても、イメージを一旦閉じると元に戻ります。
