@@ -14,6 +14,7 @@
 4. コマンドパレットを開く (Ctrl + Shift + P)。
 5. 「Remote-Containers: Open Folder in Container」を選択する。
 6. RStudio-serverを使用する場合は、[http://localhost:8787](http://localhost:8787)にアクセスする。
+7. 各projectディレクトリに移動し、Rで`renv::restore()`を実行しrenv.lockに記載されたパッケージをインストールする。
 
 ## 新しいパッケージのインストール
 
