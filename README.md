@@ -1,15 +1,21 @@
-# R.4.4.1_container
+# R.4.4.1_SeuratBP
 
+## 概要
+このリポジトリは、R.4.4.1, Seurat, BPCells, (tidyverse)環境をDockerコンテナでセットアップするためのものです。
 
-1. リポジトリをローカルにクローンする
-    - git clone https://github.com/shuu5/R.4.4.1_container.git
-2. VSCode(Cursor)でクローンしたフォルダを開く
-3. .envのRENV_PATHS_CACHE_HOST="../renv/cache"を適切なパスに書き換える。
-4. コマンドパレット(ctrl+shift+P)を開く
-5. 「Remote-Containers: Open Folder in Container」を選択する
-6. RStudio-serverを使う場合はhttp://localhost:8787にアクセスする
+## セットアップ手順
 
+1. リポジトリをローカルにクローンする:
+    ```bash
+    git clone https://github.com/shuu5/R.4.4.1_container.git
+    ```
+2. VSCodeでクローンしたフォルダを開く。
+3. `.env`ファイルの`RENV_PATHS_CACHE_HOST="../renv/cache"`を適切なパスに書き換える。
+4. コマンドパレットを開く (Ctrl + Shift + P)。
+5. 「Remote-Containers: Open Folder in Container」を選択する。
+6. RStudio-serverを使用する場合は、[http://localhost:8787](http://localhost:8787)にアクセスする。
 
-・新しいパッケージをインストールしたい場合
-    - Dockerfileの"RUN apt-get update && apt-get install -y \"に追記する。
-    - コンテナ内でインストールしてもイメージを一旦閉じると元に戻る
+## 新しいパッケージのインストール
+
+- 新しいパッケージをインストールしたい場合は、`Dockerfile`の`RUN apt-get update && apt-get install -y \`に追記する必要があります。
+- コンテナ内でインストールしても、イメージを一旦閉じると元に戻ります。
