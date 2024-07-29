@@ -1,11 +1,9 @@
-# リポジトリを明示的に設定
-options(repos = c(CRAN = "https://cloud.r-project.org/"))
-
-# renv をインストール
+options(repos = c(CRAN = "https://cloud.r-project.org"))
 install.packages("renv")
 
-# remotes をインストール
-install.packages("remotes")
+renv::init()
+
+renv::install("tidyverse")
 
 # BPCells をインストール
-remotes::install_github("bnprks/BPCells/r")
+install.packages("/home/rstudio/.local/share/renv/cache/bnprks-BPCells-v0.2.0-20-gb78bc83.tar.gz")
