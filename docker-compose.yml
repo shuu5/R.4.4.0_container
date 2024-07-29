@@ -1,5 +1,7 @@
 services:
   rstudio:
+    container_name: R440container
+    image: R440image:latest
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile

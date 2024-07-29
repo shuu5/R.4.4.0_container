@@ -1,4 +1,4 @@
-FROM rocker/rstudio:4.4.1
+FROM rocker/rstudio:4.4.0
 
 # 必要なlinux パッケージをインストール(インストールするRパッケージごとに修正が必要)
 RUN apt-get update \
@@ -6,7 +6,7 @@ RUN apt-get update \
     libxt-dev \
     fonts-ipaexfont \
     libhdf5-dev \
-    libglpk40 \
+    libglpk-dev \
   && apt-get clean
 
 # RStudio の Global Options 設定
@@ -18,5 +18,11 @@ COPY --chown=rstudio:rstudio \
 RUN mkdir -p /home/rstudio/.local/share/renv/cache \
   && chown -R rstudio:rstudio /home/rstudio
 
-# renv をインストール
-RUN R -e 'install.packages("renv")'
+# renvをインストール
+RUN R -e "install.packages('renv')"
+
+# remotesをインストール
+RUN R -e "install.packages('remotes')"
+
+# BPCellsをインストール
+RUN R -e "remotes::install_github('bnprks/BPCells/r')"
