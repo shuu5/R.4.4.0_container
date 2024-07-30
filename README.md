@@ -1,7 +1,7 @@
-# R.4.4.1_SeuratBP
+# R.4.4.0_SeuratBP
 
 ## 概要
-このリポジトリは、R.4.4.1, Seurat, BPCells, (tidyverse)環境をDockerコンテナでセットアップするためのものです。
+このリポジトリは、R.4.4.0, Seurat, BPCells, tidyverse環境をDockerコンテナでセットアップするためのものです。
 
 ## セットアップ手順
 
@@ -13,13 +13,14 @@
 3. `.env`ファイルの`RENV_PATHS_CACHE_HOST="../renv/cache"`を適切なパスに書き換える。
 4. コマンドパレットを開く (Ctrl + Shift + P)。
 5. 「Remote-Containers: Open Folder in Container」を選択する。
-6. RStudio-serverを使用する場合は、[http://localhost:8787](http://localhost:8787)にアクセスする。
-7. 各projectディレクトリに移動し、Rで`renv::restore()`を実行しrenv.lockに記載されたパッケージをインストールする。
+6. 自動で/project/init.Rが実行されるので足りないパッケージをインストールする。
+7. (RStudio-serverを使用する場合は、[http://localhost:8787](http://localhost:8787)にアクセスする。)
+
 
 ## 新しいRパッケージのインストール
 
 - renv::install()を使います。
-- githubから直接ダウンロードするなど特殊なインストール方法の場合、インストール後にrenv::snapshot()を実行して依存関係を記録してください。
+- githubから直接ダウンロードするなど特殊なインストール方法の場合、library("パッケージ名")をどこかのRファイルに記載してからrenv::snapshot()を実行して依存関係を記録してください。
 
 ## 新しいlinuxパッケージのインストール
 
