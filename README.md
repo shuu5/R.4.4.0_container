@@ -7,7 +7,7 @@
 
 1. リポジトリをローカルにクローンする:
     ```bash
-    git clone https://github.com/shuu5/R.4.4.1_container.git
+    git clone https://github.com/shuu5/R.4.4.0_container.git
     ```
 2. VSCodeでクローンしたフォルダを開く。
 3. `.env`ファイルの`RENV_PATHS_CACHE_HOST="../renv/cache"`を適切なパスに書き換える。
