@@ -1,7 +1,7 @@
 services:
   rstudio:
-    container_name: R440container
-    image: R440image:latest
+    container_name: r440container
+    image: r440image:latest
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
@@ -12,6 +12,6 @@ services:
       - DISABLE_AUTH=true
       - RENV_PATHS_CACHE=/home/rstudio/.local/share/renv/cache
     volumes:
-      - ./projects:/home/rstudio/projects
+      - ./project:/home/rstudio/project
       - ./.devcontainer:/home/rstudio/.devcontainer
       - ${RENV_PATHS_CACHE_HOST}:/home/rstudio/.local/share/renv/cache

@@ -13,5 +13,6 @@
   },
   "extensions": [
     "reditorsupport.r"
-  ]
+  ],
+  "postCreateCommand": "cd /home/rstudio/project && Rscript init.R"
 }

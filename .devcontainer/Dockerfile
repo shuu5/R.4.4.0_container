@@ -7,6 +7,7 @@ RUN apt-get update \
     fonts-ipaexfont \
     libhdf5-dev \
     libglpk-dev \
+    patch \
   && apt-get clean
 
 # RStudio の Global Options 設定
@@ -19,10 +20,4 @@ RUN mkdir -p /home/rstudio/.local/share/renv/cache \
   && chown -R rstudio:rstudio /home/rstudio
 
 # renvをインストール
-RUN R -e "install.packages('renv')"
-
-# remotesをインストール
-RUN R -e "install.packages('remotes')"
-
-# BPCellsをインストール
-RUN R -e "remotes::install_github('bnprks/BPCells/r')"
+RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
