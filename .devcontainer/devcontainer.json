@@ -12,8 +12,7 @@
     "r.lsp.path": "/usr/local/bin/R"
   },
   "extensions": [
-    "reditorsupport.r",
-    "REditorSupport.r-lsp"
+    "reditorsupport.r"
   ],
-  "postCreateCommand": "cd /home/rstudio/project && Rscript init.R"
+  "postCreateCommand": "Rscript init.R"
 }

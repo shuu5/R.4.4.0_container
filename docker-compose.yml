@@ -12,6 +12,7 @@ services:
       - DISABLE_AUTH=true
       - RENV_PATHS_CACHE=/home/rstudio/.local/share/renv/cache
     volumes:
-      - ./project:/home/rstudio/project
+      - ./projects:/home/rstudio/projects
       - ./.devcontainer:/home/rstudio/.devcontainer
+      - ./init.R:/home/rstudio/init.R
       - ${RENV_PATHS_CACHE_HOST}:/home/rstudio/.local/share/renv/cache
