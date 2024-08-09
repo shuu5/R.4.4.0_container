@@ -8,7 +8,25 @@ RUN apt-get update \
     libhdf5-dev \
     libglpk-dev \
     patch \
+    python3.11 \
+    python3.11-dev \
+    python3.11-venv \
+    python3-pip \
+    libfftw3-dev \
   && apt-get clean
+
+# Python 3.11のシンボリックリンクを作成
+RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.11 1
+RUN update-alternatives --set python3 /usr/bin/python3.11
+
+# pythonコマンドのシンボリックリンクを作成
+RUN ln -s /usr/bin/python3.11 /usr/bin/python
+
+# leidenalgとnumpyをpipでインストール
+RUN python3.11 -m pip install leidenalg numpy
+
+# Python 3.11をreticulateに設定
+ENV RETICULATE_PYTHON=/usr/bin/python3.11
 
 # RStudio の Global Options 設定
 COPY --chown=rstudio:rstudio \
@@ -19,5 +37,10 @@ COPY --chown=rstudio:rstudio \
 RUN mkdir -p /home/rstudio/.local/share/renv/cache \
   && chown -R rstudio:rstudio /home/rstudio
 
-# renvをインストール
+# renv, languageserver, jsonlite, remotesをインストール
+RUN R -e "install.packages('jsonlite', repos = c(CRAN = 'https://cloud.r-project.org'))"
 RUN R -e "install.packages('renv', repos = c(CRAN = 'https://cloud.r-project.org'))"
+RUN R -e "install.packages('remotes', repos = c(CRAN = 'https://cloud.r-project.org'))"
+
+# remotesを使って、githubからのパッケージインストール(BPCells)
+RUN R -e "remotes::install_github('bnprks/BPCells/r')"

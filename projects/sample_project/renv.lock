@@ -88,8 +88,7 @@
     "MASS": {
       "Package": "MASS",
       "Version": "7.3-60.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Source": "unknown",
       "Requirements": [
         "R",
         "grDevices",
